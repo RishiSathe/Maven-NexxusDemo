@@ -31,16 +31,35 @@
           <target>17</target>
         </configuration>
       </plugin>
+
       <!-- WAR plugin -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-war-plugin</artifactId>
         <version>3.3.2</version>
       </plugin>
+
+      <!-- OWASP Dependency-Check plugin -->
+      <plugin>
+        <groupId>org.owasp</groupId>
+        <artifactId>dependency-check-maven</artifactId>
+        <version>9.0.9</version>
+        <configuration>
+          <failBuildOnCVSS>7</failBuildOnCVSS>
+          <format>HTML</format>
+          <outputDirectory>${project.build.directory}/dependency-check-report</outputDirectory>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
 
-  <!-- Distribution management must be here, outside dependencies/build -->
   <distributionManagement>
     <repository>
       <id>nexus-releases</id>
